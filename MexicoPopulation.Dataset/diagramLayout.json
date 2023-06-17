@@ -1,0 +1,126 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 767.90000000000009,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 1837.9,
+            "y": 0
+          },
+          "nodeIndex": "_Measures",
+          "nodeLineageTag": "46543458-7a1d-4b3b-b913-e001cd9a89eb",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 167,
+            "y": 242
+          },
+          "nodeIndex": "Mexico_Deaths",
+          "nodeLineageTag": "87a387eb-82ae-48a9-9356-9d62257215a8",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 680.2,
+            "y": 236
+          },
+          "nodeIndex": "Mexico_Population",
+          "nodeLineageTag": "d0169f24-71b8-452b-a2cb-ac4226805fad",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 98.199999999999818,
+            "y": 0
+          },
+          "nodeIndex": "Age",
+          "nodeLineageTag": "d25cb4b8-4e81-4901-b513-fa7144060ea5",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 400.40000000000009,
+            "y": 8
+          },
+          "nodeIndex": "Gender",
+          "nodeLineageTag": "aa70119b-209e-4f83-ad00-5d45ba56231f",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 684.69999999999982,
+            "y": 0
+          },
+          "nodeIndex": "Location",
+          "nodeLineageTag": "28dab908-a774-42c2-b497-3f855b29f587",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 451
+          },
+          "nodeIndex": "Date",
+          "nodeLineageTag": "8fa50cbf-7946-47d3-b6bb-85e149f61aea",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2703.3,
+            "y": 0
+          },
+          "nodeIndex": "DateAutoTemplate",
+          "nodeLineageTag": "5c5b7a6c-a815-428c-b56e-4ca31edc82ae",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

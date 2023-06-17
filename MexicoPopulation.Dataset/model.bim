@@ -1,0 +1,4196 @@
+{
+  "name": "SemanticModel",
+  "compatibilityLevel": 1567,
+  "model": {
+    "culture": "en-US",
+    "dataAccessOptions": {
+      "legacyRedirects": true,
+      "returnErrorValuesAsNull": true
+    },
+    "defaultPowerBIDataSourceVersion": "powerBI_V3",
+    "sourceQueryCulture": "en-US",
+    "tables": [
+      {
+        "name": "Age",
+        "lineageTag": "d25cb4b8-4e81-4901-b513-fa7144060ea5",
+        "columns": [
+          {
+            "name": "Age",
+            "dataType": "string",
+            "sourceColumn": "Age",
+            "sortByColumn": "Order",
+            "lineageTag": "f6717ea2-72a7-4412-87dd-7edc22bd3ba0",
+            "summarizeBy": "none",
+            "changedProperties": [
+              {
+                "property": "SortByColumn"
+              }
+            ],
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Order",
+            "dataType": "int64",
+            "sourceColumn": "Order",
+            "formatString": "0",
+            "lineageTag": "717df10a-309b-4bf0-9688-c4a7dd44ad25",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Age-48e771fe-8586-47d8-8600-e5683da3b584",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = Mexico_Population,",
+                "    #\"Removed Other Columns\" = Table.SelectColumns(Source,{\"Age\"}),",
+                "    #\"Removed Duplicates\" = Table.Distinct(#\"Removed Other Columns\"),",
+                "    #\"Added Conditional Column\" = Table.AddColumn(#\"Removed Duplicates\", \"Order\", each if [Age] = \"0 to 4 years\" then 1 else if [Age] = \"5 to 9 years\" then 2 else if [Age] = \"10 to 14 years\" then 3 else if [Age] = \"15 to 19 years\" then 4 else if [Age] = \"20 to 24 years\" then 5 else if [Age] = \"25 to 29 years\" then 6 else if [Age] = \"30 to 34 years\" then 7 else if [Age] = \"35 to 39 years\" then 8 else if [Age] = \"40 to 44 years\" then 9 else if [Age] = \"45 to 49 years\" then 10 else if [Age] = \"50 to 54 years\" then 11 else if [Age] = \"55 to 59 years\" then 12 else if [Age] = \"60 to 64 years\" then 13 else if [Age] = \"65 to 69 years\" then 14 else if [Age] = \"70 to 74 years\" then 15 else if [Age] = \"75 to 79 years\" then 16 else if [Age] = \"80 to 84 years\" then 17 else if [Age] = \"85 to 89 years\" then 18 else if [Age] = \"90 to 94 years\" then 19 else if [Age] = \"95 to 99 years\" then 20 else if [Age] = \"100 years+\" then 21 else if [Age] = \"All Ages\" then 22 else if [Age] = \"Unidentified_Age\" then 23 else \"error\"),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Added Conditional Column\",{{\"Order\", Int64.Type}}),",
+                "    #\"Sorted Rows\" = Table.Sort(#\"Changed Type\",{{\"Order\", Order.Ascending}})",
+                "in",
+                "    #\"Sorted Rows\""
+              ]
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ]
+      },
+      {
+        "name": "Date",
+        "lineageTag": "8fa50cbf-7946-47d3-b6bb-85e149f61aea",
+        "dataCategory": "Time",
+        "columns": [
+          {
+            "type": "calculatedTableColumn",
+            "name": "Date",
+            "dataType": "dateTime",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "isKey": true,
+            "sourceColumn": "DateAutoTemplate[Date]",
+            "formatString": "mm/dd/yyyy",
+            "lineageTag": "6f2ed7e3-b4bf-44e9-b893-79681d20861a",
+            "dataCategory": "PaddedDateTableDates",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SQLBI_AttributeTypes",
+                "value": "Date"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isDateTimeCustom\":true}"
+              }
+            ]
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "DateWithTransactions",
+            "dataType": "boolean",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "sourceColumn": "DateAutoTemplate[DateWithTransactions]",
+            "lineageTag": "fca801fa-21cb-4dab-b6ca-0bf9e7cb362d",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SQLBI_AttributeTypes",
+                "value": "DateDuration"
+              }
+            ]
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Day of Week",
+            "dataType": "string",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "DateAutoTemplate[Day of Week]",
+            "sortByColumn": "Day of Week Number",
+            "lineageTag": "7682146b-7761-45c2-804d-faa9e7c7a047",
+            "dataCategory": "DayOfWeek",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SQLBI_FilterSafe",
+                "value": "True"
+              }
+            ]
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Day of Week Number",
+            "dataType": "int64",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "sourceColumn": "DateAutoTemplate[Day of Week Number]",
+            "lineageTag": "263e0b61-4ac6-4a1b-939a-2bf0c515814e",
+            "dataCategory": "DayOfWeek",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SQLBI_AttributeTypes",
+                "value": "DayOfWeek"
+              },
+              {
+                "name": "SQLBI_FilterSafe",
+                "value": "True"
+              },
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Month",
+            "dataType": "string",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "DateAutoTemplate[Month]",
+            "sortByColumn": "Month Number",
+            "lineageTag": "ef07a186-4a36-4979-baad-f21d53aea56b",
+            "dataCategory": "MonthOfYear",
+            "summarizeBy": "none"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Month Number",
+            "dataType": "int64",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "sourceColumn": "DateAutoTemplate[Month Number]",
+            "lineageTag": "f4c74127-8a98-454f-b2d0-123b2aefc9e3",
+            "dataCategory": "MonthOfYear",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Quarter",
+            "dataType": "string",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "DateAutoTemplate[Quarter]",
+            "lineageTag": "78bfbdfd-1df0-4bb7-83d4-df70eb6347f5",
+            "dataCategory": "QuarterOfYear",
+            "summarizeBy": "none"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Year",
+            "dataType": "int64",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "DateAutoTemplate[Year]",
+            "lineageTag": "42b0d4f5-48e5-443f-885e-f20757ffcf11",
+            "dataCategory": "Years",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Year Month",
+            "dataType": "string",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "DateAutoTemplate[Year Month]",
+            "sortByColumn": "Year Month Number",
+            "lineageTag": "259df6b8-f694-4012-85c6-9710d15adf44",
+            "dataCategory": "Months",
+            "summarizeBy": "none"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Year Month Number",
+            "dataType": "int64",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "sourceColumn": "DateAutoTemplate[Year Month Number]",
+            "lineageTag": "4a5d4b71-d263-49fe-b648-a4198ecce8df",
+            "dataCategory": "Months",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Year Quarter",
+            "dataType": "string",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "DateAutoTemplate[Year Quarter]",
+            "sortByColumn": "Year Quarter Number",
+            "lineageTag": "d84c867c-ec9f-425e-be22-104f3f753f0a",
+            "dataCategory": "Quarters",
+            "summarizeBy": "none"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Year Quarter Number",
+            "dataType": "int64",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "sourceColumn": "DateAutoTemplate[Year Quarter Number]",
+            "lineageTag": "5250190c-b092-43b7-9edf-24d9ff30663e",
+            "dataCategory": "Quarters",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Date",
+            "mode": "import",
+            "source": {
+              "type": "calculated",
+              "expression": "DateAutoTemplate"
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "_ShowValueForDates",
+            "expression": [
+              "",
+              "VAR __LastDateWithData =",
+              "    CALCULATE (",
+              "        MAXX ( { MAX ( 'Mexico_Deaths'[Date] ), MAX ( 'Mexico_Population'[Date] ) }, ''[Value] ),",
+              "        REMOVEFILTERS ()",
+              "    )",
+              "VAR __FirstDateVisible =",
+              "    MIN ( 'Date'[Date] )",
+              "VAR __Result =",
+              "    __FirstDateVisible <= __LastDateWithData",
+              "RETURN",
+              "    __Result"
+            ],
+            "isHidden": true,
+            "displayFolder": "Hidden Time Intelligence",
+            "lineageTag": "ae2478ca-6788-4aa2-82ba-176bac66209f",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "Calendar",
+            "lineageTag": "cfb7d1d9-83e3-405a-9125-46aae9734d96",
+            "levels": [
+              {
+                "name": "Year",
+                "ordinal": 0,
+                "column": "Year",
+                "lineageTag": "12886a46-99ca-4bca-89a6-c7bcc98705cf"
+              },
+              {
+                "name": "Month",
+                "ordinal": 1,
+                "column": "Year Month",
+                "lineageTag": "e6e5441e-dac4-4dce-bc94-796c369f04d3"
+              },
+              {
+                "name": "Date",
+                "ordinal": 2,
+                "column": "Date",
+                "lineageTag": "816470cd-d0f1-4486-8eab-ea661144788c"
+              }
+            ]
+          }
+        ],
+        "annotations": [
+          {
+            "name": "SQLBI_Template",
+            "value": "Dates"
+          },
+          {
+            "name": "SQLBI_TemplateTable",
+            "value": "Date"
+          },
+          {
+            "name": "SQLBI_CalendarType",
+            "value": "Calendar"
+          }
+        ]
+      },
+      {
+        "name": "DateAutoTemplate",
+        "isHidden": true,
+        "lineageTag": "5c5b7a6c-a815-428c-b56e-4ca31edc82ae",
+        "dataCategory": "Time",
+        "columns": [
+          {
+            "type": "calculatedTableColumn",
+            "name": "Date",
+            "dataType": "dateTime",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "isKey": true,
+            "sourceColumn": "[Date]",
+            "formatString": "m/d/yyyy",
+            "lineageTag": "58e7b7d9-86f6-40f9-b5c7-654988747c1e",
+            "dataCategory": "PaddedDateTableDates",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SQLBI_AttributeTypes",
+                "value": "Date"
+              }
+            ]
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "DateWithTransactions",
+            "dataType": "boolean",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "sourceColumn": "[DateWithTransactions]",
+            "lineageTag": "5e0e1b5d-21fd-479e-95e5-f56968f8deb8",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SQLBI_AttributeTypes",
+                "value": "DateDuration"
+              }
+            ]
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Day of Week",
+            "dataType": "string",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "sourceColumn": "[Day of Week]",
+            "sortByColumn": "Day of Week Number",
+            "lineageTag": "eead1102-7f1a-4885-bb4c-799d78b6db18",
+            "dataCategory": "DayOfWeek",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SQLBI_FilterSafe",
+                "value": "True"
+              }
+            ]
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Day of Week Number",
+            "dataType": "int64",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "sourceColumn": "[Day of Week Number]",
+            "lineageTag": "5105c6e5-2639-4330-9703-464673d0769b",
+            "dataCategory": "DayOfWeek",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SQLBI_AttributeTypes",
+                "value": "DayOfWeek"
+              },
+              {
+                "name": "SQLBI_FilterSafe",
+                "value": "True"
+              }
+            ]
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Month",
+            "dataType": "string",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "sourceColumn": "[Month]",
+            "sortByColumn": "Month Number",
+            "lineageTag": "91e0bf2b-7a56-4d5f-91e0-9348bacd00dc",
+            "dataCategory": "MonthOfYear",
+            "summarizeBy": "none"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Month Number",
+            "dataType": "int64",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "sourceColumn": "[Month Number]",
+            "lineageTag": "22579bde-f05d-4d69-8d22-0ee7078e263d",
+            "dataCategory": "MonthOfYear",
+            "summarizeBy": "none"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Quarter",
+            "dataType": "string",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "sourceColumn": "[Quarter]",
+            "lineageTag": "bf7c7f71-1897-4030-a96d-df581534fae0",
+            "dataCategory": "QuarterOfYear",
+            "summarizeBy": "none"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Year",
+            "dataType": "int64",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "sourceColumn": "[Year]",
+            "lineageTag": "76ef456b-a2ef-4c24-badb-8495d04a0494",
+            "dataCategory": "Years",
+            "summarizeBy": "none"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Year Month",
+            "dataType": "string",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "sourceColumn": "[Year Month]",
+            "sortByColumn": "Year Month Number",
+            "lineageTag": "4b47567a-0ba0-447b-9abd-48c458a2cdf8",
+            "dataCategory": "Months",
+            "summarizeBy": "none"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Year Month Number",
+            "dataType": "int64",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "sourceColumn": "[Year Month Number]",
+            "lineageTag": "a92c695b-0844-4afc-b142-cb3ee1448218",
+            "dataCategory": "Months",
+            "summarizeBy": "none"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Year Quarter",
+            "dataType": "string",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "sourceColumn": "[Year Quarter]",
+            "sortByColumn": "Year Quarter Number",
+            "lineageTag": "07184c3a-5aa9-4a7f-8709-51e5c0e3f1a7",
+            "dataCategory": "Quarters",
+            "summarizeBy": "none"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Year Quarter Number",
+            "dataType": "int64",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "sourceColumn": "[Year Quarter Number]",
+            "lineageTag": "e3c845ef-c16d-431d-bda8-661a77161b3f",
+            "dataCategory": "Quarters",
+            "summarizeBy": "none"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "DateAutoTemplate",
+            "mode": "import",
+            "source": {
+              "type": "calculated",
+              "expression": [
+                "",
+                "--  ",
+                "--     Configuration",
+                "--  ",
+                "VAR __FirstDayOfWeek = 1",
+                "----------------------------------------",
+                "VAR __WeekDayCalculationType = IF ( __FirstDayOfWeek = 0, 7, __FirstDayOfWeek ) + 10",
+                "VAR __Calendar = ",
+                "    VAR __FirstYear = YEAR ( MINX ( { MIN ( 'Mexico_Deaths'[Date] ), MIN ( 'Mexico_Population'[Date] ) }, ''[Value] ) )",
+                "    VAR __LastYear =  YEAR ( MAXX ( { MAX ( 'Mexico_Deaths'[Date] ), MAX ( 'Mexico_Population'[Date] ) }, ''[Value] ) )",
+                "    RETURN CALENDAR (",
+                "        DATE ( __FirstYear, 1, 1 ),",
+                "        DATE ( __LastYear, 12, 31 )",
+                "    )",
+                "VAR __Step3 = ",
+                "    GENERATE (",
+                "        __Calendar,",
+                "        VAR __IsStandardLocale = IF ( FORMAT( DATE( 2000, 1, 1 ), \"oooo\" ) = \"oooo\", TRUE, FALSE )",
+                "        VAR __MonthFormatString = IF( __IsStandardLocale, \"mmm\", \"ooo\" )",
+                "        VAR __DayFormatString = IF( __IsStandardLocale, \"ddd\", \"aaa\" )",
+                "        VAR __LastTransactionDate = MAXX ( { MAX ( 'Mexico_Deaths'[Date] ), MAX ( 'Mexico_Population'[Date] ) }, ''[Value] )",
+                "        VAR __Date = [Date]",
+                "        VAR __YearNumber = YEAR ( __Date )",
+                "        VAR __QuarterNumber = QUARTER ( __Date )",
+                "        VAR __YearQuarterNumber = CONVERT ( __YearNumber * 4 + __QuarterNumber - 1, INTEGER )",
+                "        VAR __MonthNumber = MONTH ( __Date )",
+                "        VAR __WeekDayNumber = WEEKDAY ( __Date, __WeekDayCalculationType )",
+                "        VAR __WeekDay = FORMAT ( __Date, __DayFormatString )",
+                "        RETURN ROW ( ",
+                "            \"Year\", __YearNumber,",
+                "            \"Year Quarter Number\", __YearQuarterNumber,",
+                "            \"Year Quarter\", FORMAT ( __QuarterNumber, \"\\Q0\" ) & \"-\" & FORMAT ( __YearNumber, \"0000\" ),",
+                "            \"Quarter\", FORMAT( __QuarterNumber, \"\\Q0\" ),",
+                "            \"Year Month\", FORMAT ( __Date, __MonthFormatString & \" yyyy\" ),",
+                "            \"Year Month Number\", __YearNumber * 12 + __MonthNumber - 1,",
+                "            \"Month\", FORMAT ( __Date, __MonthFormatString ),",
+                "            \"Month Number\", __MonthNumber,",
+                "            \"Day of Week Number\", __WeekDayNumber,",
+                "            \"Day of Week\", __WeekDay,",
+                "            \"DateWithTransactions\", __Date <= __LastTransactionDate ",
+                "        )",
+                "    )",
+                "RETURN",
+                "    __Step3"
+              ]
+            }
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "Calendar",
+            "isHidden": true,
+            "lineageTag": "19910a24-e4db-45de-b59e-022fa462e125",
+            "levels": [
+              {
+                "name": "Year",
+                "ordinal": 0,
+                "column": "Year",
+                "lineageTag": "cbdba0b6-fc3c-4432-b5ae-b75d1c72ca56"
+              },
+              {
+                "name": "Month",
+                "ordinal": 1,
+                "column": "Year Month",
+                "lineageTag": "ad22d444-4ae4-4156-ad75-645ee95804c8"
+              },
+              {
+                "name": "Date",
+                "ordinal": 2,
+                "column": "Date",
+                "lineageTag": "5bc5be31-b264-4585-8247-8a8e5cd8dd2c"
+              }
+            ]
+          }
+        ],
+        "annotations": [
+          {
+            "name": "SQLBI_Template",
+            "value": "Dates"
+          },
+          {
+            "name": "SQLBI_TemplateTable",
+            "value": "DateAutoTemplate"
+          },
+          {
+            "name": "SQLBI_CalendarType",
+            "value": "Calendar"
+          }
+        ]
+      },
+      {
+        "name": "Gender",
+        "lineageTag": "aa70119b-209e-4f83-ad00-5d45ba56231f",
+        "columns": [
+          {
+            "name": "Gender",
+            "dataType": "string",
+            "sourceColumn": "Gender",
+            "lineageTag": "7d3c1b0c-43fe-4038-a06a-abdb0bf5d0c8",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Gender-442cda3f-78ad-453b-b263-c0c88be33b29",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = Mexico_Population,",
+                "    #\"Removed Other Columns\" = Table.SelectColumns(Source,{\"Gender\"}),",
+                "    #\"Removed Duplicates\" = Table.Distinct(#\"Removed Other Columns\")",
+                "in",
+                "    #\"Removed Duplicates\""
+              ]
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ]
+      },
+      {
+        "name": "Location",
+        "lineageTag": "28dab908-a774-42c2-b497-3f855b29f587",
+        "columns": [
+          {
+            "name": "Location_Name",
+            "dataType": "string",
+            "sourceColumn": "Location_Name",
+            "lineageTag": "30c42919-67a9-4006-a84c-15d9c21da0e4",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Location-87e1910a-f8aa-4e60-bf63-7017a9a64adb",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = Mexico_Population,",
+                "    #\"Removed Other Columns\" = Table.SelectColumns(Source,{\"Location_Name\"}),",
+                "    #\"Removed Duplicates\" = Table.Distinct(#\"Removed Other Columns\")",
+                "in",
+                "    #\"Removed Duplicates\""
+              ]
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ]
+      },
+      {
+        "name": "Mexico_Deaths",
+        "lineageTag": "87a387eb-82ae-48a9-9356-9d62257215a8",
+        "columns": [
+          {
+            "name": "Date",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "Date",
+            "formatString": "Long Date",
+            "lineageTag": "4a7c02d4-52cb-4cf9-be3f-ee8b500b7516",
+            "summarizeBy": "none",
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
+              }
+            ]
+          },
+          {
+            "name": "Death_Name",
+            "dataType": "string",
+            "sourceColumn": "Death_Name",
+            "lineageTag": "b07e2e91-eb17-444c-95ad-c663483428de",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Deaths",
+            "dataType": "int64",
+            "sourceColumn": "Deaths",
+            "formatString": "0",
+            "lineageTag": "1c5ced71-a2ba-4447-9979-baa1939b9bd1",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Location_Name",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "Location_Name",
+            "lineageTag": "b3ada5e8-d870-4179-b5bb-cb25d5a7a5fa",
+            "summarizeBy": "none",
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Mexico_Deaths-e1ef27c0-71e9-47f7-a282-20038ed82016",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = PowerPlatform.Dataflows(null),",
+                "    Workspaces = Source{[Id=\"Workspaces\"]}[Data],",
+                "    #\"002bcd91-56c2-4741-8b92-0ba0b62f1af4\" = Workspaces{[workspaceId=\"002bcd91-56c2-4741-8b92-0ba0b62f1af4\"]}[Data],",
+                "    #\"a11be360-f02f-40a3-947d-5cc6d3e8981e\" = #\"002bcd91-56c2-4741-8b92-0ba0b62f1af4\"{[dataflowId=\"a11be360-f02f-40a3-947d-5cc6d3e8981e\"]}[Data],",
+                "    Mexico_Deaths_ = #\"a11be360-f02f-40a3-947d-5cc6d3e8981e\"{[entity=\"Mexico_Deaths\",version=\"\"]}[Data]",
+                "in",
+                "    Mexico_Deaths_"
+              ]
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ]
+      },
+      {
+        "name": "Mexico_Population",
+        "lineageTag": "d0169f24-71b8-452b-a2cb-ac4226805fad",
+        "columns": [
+          {
+            "name": "Age",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "Age",
+            "lineageTag": "90e8facc-ef09-4389-84b8-54fe51451089",
+            "summarizeBy": "none",
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Date",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "Date",
+            "formatString": "Long Date",
+            "lineageTag": "f6e6767a-e9d8-48be-adc9-8fe70e410262",
+            "summarizeBy": "none",
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
+              }
+            ]
+          },
+          {
+            "name": "Gender",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "Gender",
+            "lineageTag": "07a6ef2f-8f8f-4115-96be-7f6c4161d191",
+            "summarizeBy": "none",
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Location_Name",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "Location_Name",
+            "lineageTag": "aeabd90e-c1f8-4bc9-9e43-7fd097f20c65",
+            "summarizeBy": "none",
+            "changedProperties": [
+              {
+                "property": "IsHidden"
+              }
+            ],
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "Population",
+            "dataType": "double",
+            "sourceColumn": "Population",
+            "lineageTag": "fb157a81-f3f1-423e-8a45-98d390c84dac",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Mexico_Population-482c2d4e-7c81-4b66-b352-1b461200749c",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = PowerPlatform.Dataflows(null),",
+                "    Workspaces = Source{[Id=\"Workspaces\"]}[Data],",
+                "    #\"002bcd91-56c2-4741-8b92-0ba0b62f1af4\" = Workspaces{[workspaceId=\"002bcd91-56c2-4741-8b92-0ba0b62f1af4\"]}[Data],",
+                "    #\"a11be360-f02f-40a3-947d-5cc6d3e8981e\" = #\"002bcd91-56c2-4741-8b92-0ba0b62f1af4\"{[dataflowId=\"a11be360-f02f-40a3-947d-5cc6d3e8981e\"]}[Data],",
+                "    Mexico_Population_ = #\"a11be360-f02f-40a3-947d-5cc6d3e8981e\"{[entity=\"Mexico_Population\",version=\"\"]}[Data]",
+                "in",
+                "    Mexico_Population_"
+              ]
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ]
+      },
+      {
+        "name": "_Measures",
+        "lineageTag": "46543458-7a1d-4b3b-b913-e001cd9a89eb",
+        "partitions": [
+          {
+            "name": "_Measures-a181fff8-6931-4248-800c-0c1a1335172b",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText(\"i44FAA==\", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t])",
+                "in",
+                "    Source"
+              ]
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "Sum of Population",
+            "expression": "SUM(Mexico_Population[Population])",
+            "lineageTag": "1165c6ef-0e21-45a1-bcc3-8a7f98d384b9",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ]
+          },
+          {
+            "name": "Population_Mexico_Totals",
+            "expression": [
+              "",
+              "CALCULATE([Sum of Population],",
+              "KEEPFILTERS(TREATAS({\"Both\"},Gender[Gender])),",
+              "KEEPFILTERS(TREATAS({\"All Ages\"}, Age[Age])",
+              "))"
+            ],
+            "lineageTag": "1e84b77b-13f6-4295-b6dd-fe3943f53538",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ]
+          },
+          {
+            "name": "Population_Mexico_Detailed",
+            "expression": [
+              "",
+              "CALCULATE([Sum of Population],",
+              "    FILTER(Age,Age[Age] <> \"All Ages\"),",
+              "    FILTER(Gender,Gender[Gender]<>\"Both\")",
+              ")"
+            ],
+            "lineageTag": "377626d2-2e6a-40e1-8b9d-4c8aef09d4c4",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ]
+          },
+          {
+            "name": "YTD Sum of Mexico Population",
+            "expression": [
+              "",
+              "IF (",
+              "    [_ShowValueForDates],",
+              "    CALCULATE (",
+              "        [Sum of Population],",
+              "        DATESYTD ( 'Date'[Date] )",
+              "    )",
+              ")"
+            ],
+            "displayFolder": "Time intelligence\\To-date total\\Sum of Mexico Population",
+            "lineageTag": "d5931d2b-f187-4ac8-a32d-a0aa48371a43",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "QTD Sum of Mexico Population",
+            "expression": [
+              "",
+              "IF (",
+              "    [_ShowValueForDates],",
+              "    CALCULATE (",
+              "        [Sum of Population],",
+              "        DATESQTD ( 'Date'[Date] )",
+              "    )",
+              ")"
+            ],
+            "displayFolder": "Time intelligence\\To-date total\\Sum of Mexico Population",
+            "lineageTag": "ee917921-636f-4ff4-bb7d-b2be960e9c92",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "MTD Sum of Mexico Population",
+            "expression": [
+              "",
+              "IF (",
+              "    [_ShowValueForDates],",
+              "    CALCULATE (",
+              "        [Sum of Population],",
+              "        DATESMTD ( 'Date'[Date] )",
+              "    )",
+              ")"
+            ],
+            "displayFolder": "Time intelligence\\To-date total\\Sum of Mexico Population",
+            "lineageTag": "0a6a6acf-fbce-4eed-8c8d-cd65c9da9e53",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "PY Sum of Mexico Population",
+            "expression": [
+              "",
+              "IF (",
+              "    [_ShowValueForDates],",
+              "    CALCULATE (",
+              "        [Sum of Population],",
+              "        CALCULATETABLE (",
+              "            DATEADD ( 'Date'[Date], -1, YEAR ),",
+              "            'Date'[DateWithTransactions] = TRUE",
+              "        )",
+              "    )",
+              ")"
+            ],
+            "displayFolder": "Time intelligence\\Growth\\Sum of Mexico Population",
+            "lineageTag": "d8ba7bff-8748-425b-b851-eb851156b9c1",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "YOY Sum of Mexico Population",
+            "expression": [
+              "",
+              "VAR __ValueCurrentPeriod = [Sum of Population]",
+              "VAR __ValuePreviousPeriod = [PY Sum of Mexico Population]",
+              "VAR __Result =",
+              "    IF (",
+              "        NOT ISBLANK ( __ValueCurrentPeriod ) && NOT ISBLANK ( __ValuePreviousPeriod ),",
+              "        __ValueCurrentPeriod - __ValuePreviousPeriod",
+              "    )",
+              "RETURN",
+              "    __Result"
+            ],
+            "displayFolder": "Time intelligence\\Growth\\Sum of Mexico Population",
+            "lineageTag": "a84e4407-2012-4765-ad72-689fa7e104a5",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "YOY % Sum of Mexico Population",
+            "expression": [
+              "",
+              "DIVIDE ( ",
+              "    [YOY Sum of Mexico Population],",
+              "    [PY Sum of Mexico Population]",
+              ")"
+            ],
+            "formatString": "0.00%",
+            "displayFolder": "Time intelligence\\Growth\\Sum of Mexico Population",
+            "lineageTag": "d5d644ea-9fca-4161-b988-13a377e7b562",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "PQ Sum of Mexico Population",
+            "expression": [
+              "",
+              "IF (",
+              "    [_ShowValueForDates],",
+              "    CALCULATE (",
+              "        [Sum of Population],",
+              "        CALCULATETABLE (",
+              "            DATEADD ( 'Date'[Date], -1, QUARTER ),",
+              "            'Date'[DateWithTransactions] = TRUE",
+              "        )",
+              "    )",
+              ")"
+            ],
+            "displayFolder": "Time intelligence\\Growth\\Sum of Mexico Population",
+            "lineageTag": "8d37a08f-d8d8-451b-85db-708f640f5787",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "QOQ Sum of Mexico Population",
+            "expression": [
+              "",
+              "VAR __ValueCurrentPeriod = [Sum of Population]",
+              "VAR __ValuePreviousPeriod = [PQ Sum of Mexico Population]",
+              "VAR __Result =",
+              "    IF (",
+              "        NOT ISBLANK ( __ValueCurrentPeriod ) && NOT ISBLANK ( __ValuePreviousPeriod ),",
+              "        __ValueCurrentPeriod - __ValuePreviousPeriod",
+              "    )",
+              "RETURN",
+              "    __Result"
+            ],
+            "displayFolder": "Time intelligence\\Growth\\Sum of Mexico Population",
+            "lineageTag": "f1e8bb96-00cd-4b9b-8a78-c25949e34f06",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "QOQ % Sum of Mexico Population",
+            "expression": [
+              "",
+              "DIVIDE ( ",
+              "    [QOQ Sum of Mexico Population],",
+              "    [PQ Sum of Mexico Population]",
+              ")"
+            ],
+            "formatString": "0.00%",
+            "displayFolder": "Time intelligence\\Growth\\Sum of Mexico Population",
+            "lineageTag": "c597d30b-0129-460d-a843-0f7108d3519a",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "PM Sum of Mexico Population",
+            "expression": [
+              "",
+              "IF (",
+              "    [_ShowValueForDates],",
+              "    CALCULATE (",
+              "        [Sum of Population],",
+              "        CALCULATETABLE (",
+              "            DATEADD ( 'Date'[Date], -1, MONTH ),",
+              "            'Date'[DateWithTransactions] = TRUE",
+              "        )",
+              "    )",
+              ")"
+            ],
+            "displayFolder": "Time intelligence\\Growth\\Sum of Mexico Population",
+            "lineageTag": "c59a0733-667a-4a2f-aea1-f751ea366533",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "MOM Sum of Mexico Population",
+            "expression": [
+              "",
+              "VAR __ValueCurrentPeriod = [Sum of Population]",
+              "VAR __ValuePreviousPeriod = [PM Sum of Mexico Population]",
+              "VAR __Result =",
+              "    IF (",
+              "        NOT ISBLANK ( __ValueCurrentPeriod ) && NOT ISBLANK ( __ValuePreviousPeriod ),",
+              "        __ValueCurrentPeriod - __ValuePreviousPeriod",
+              "    )",
+              "RETURN",
+              "    __Result"
+            ],
+            "displayFolder": "Time intelligence\\Growth\\Sum of Mexico Population",
+            "lineageTag": "7621c219-0a3e-403b-8008-ab136f358455",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "MOM % Sum of Mexico Population",
+            "expression": [
+              "",
+              "DIVIDE ( ",
+              "    [MOM Sum of Mexico Population],",
+              "    [PM Sum of Mexico Population]",
+              ")"
+            ],
+            "formatString": "0.00%",
+            "displayFolder": "Time intelligence\\Growth\\Sum of Mexico Population",
+            "lineageTag": "23bf0cdf-a205-450c-9a60-ea7996161da2",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "PYTD Sum of Mexico Population",
+            "expression": [
+              "",
+              "IF (",
+              "    [_ShowValueForDates],",
+              "    CALCULATE (",
+              "        [YTD Sum of Mexico Population],",
+              "        CALCULATETABLE (",
+              "            DATEADD ( 'Date'[Date], -1, YEAR ),",
+              "            'Date'[DateWithTransactions] = TRUE",
+              "        )",
+              "    )",
+              ")"
+            ],
+            "displayFolder": "Time intelligence\\To-date growth\\Sum of Mexico Population",
+            "lineageTag": "31c3aa0a-b333-43c4-a48c-0417f827b820",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "YOYTD Sum of Mexico Population",
+            "expression": [
+              "",
+              "VAR __ValueCurrentPeriod = [YTD Sum of Mexico Population]",
+              "VAR __ValuePreviousPeriod = [PYTD Sum of Mexico Population]",
+              "VAR __Result =",
+              "    IF (",
+              "        NOT ISBLANK ( __ValueCurrentPeriod ) && NOT ISBLANK ( __ValuePreviousPeriod ),",
+              "        __ValueCurrentPeriod - __ValuePreviousPeriod",
+              "    )",
+              "RETURN",
+              "    __Result"
+            ],
+            "displayFolder": "Time intelligence\\To-date growth\\Sum of Mexico Population",
+            "lineageTag": "f99c3dd2-e876-415a-a9dc-5ec6fa770534",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "YOYTD % Sum of Mexico Population",
+            "expression": [
+              "",
+              "DIVIDE ( ",
+              "    [YOYTD Sum of Mexico Population],",
+              "    [PYTD Sum of Mexico Population]",
+              ")"
+            ],
+            "formatString": "0.00%",
+            "displayFolder": "Time intelligence\\To-date growth\\Sum of Mexico Population",
+            "lineageTag": "2dd52afe-9105-43a1-b091-d437a1a058af",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "PQTD Sum of Mexico Population",
+            "expression": [
+              "",
+              "IF (",
+              "    [_ShowValueForDates],",
+              "    CALCULATE (",
+              "        [QTD Sum of Mexico Population],",
+              "        CALCULATETABLE (",
+              "            DATEADD ( 'Date'[Date], -1, QUARTER ),",
+              "            'Date'[DateWithTransactions] = TRUE",
+              "        )",
+              "    )",
+              ")"
+            ],
+            "displayFolder": "Time intelligence\\To-date growth\\Sum of Mexico Population",
+            "lineageTag": "5925efd9-aaab-4f25-96b0-bb29eb9d1a1d",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "QOQTD Sum of Mexico Population",
+            "expression": [
+              "",
+              "VAR __ValueCurrentPeriod = [QTD Sum of Mexico Population]",
+              "VAR __ValuePreviousPeriod = [PQTD Sum of Mexico Population]",
+              "VAR __Result =",
+              "    IF (",
+              "        NOT ISBLANK ( __ValueCurrentPeriod ) && NOT ISBLANK ( __ValuePreviousPeriod ),",
+              "        __ValueCurrentPeriod - __ValuePreviousPeriod",
+              "    )",
+              "RETURN",
+              "    __Result"
+            ],
+            "displayFolder": "Time intelligence\\To-date growth\\Sum of Mexico Population",
+            "lineageTag": "8db2fa8a-7025-4776-90bc-db27087b0067",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "QOQTD % Sum of Mexico Population",
+            "expression": [
+              "",
+              "DIVIDE ( ",
+              "    [QOQTD Sum of Mexico Population],",
+              "    [PQTD Sum of Mexico Population]",
+              ")"
+            ],
+            "formatString": "0.00%",
+            "displayFolder": "Time intelligence\\To-date growth\\Sum of Mexico Population",
+            "lineageTag": "f5e1d73a-dc5e-42a7-80df-f0d0ba25b751",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "PMTD Sum of Mexico Population",
+            "expression": [
+              "",
+              "IF (",
+              "    [_ShowValueForDates],",
+              "    CALCULATE (",
+              "        [MTD Sum of Mexico Population],",
+              "        CALCULATETABLE (",
+              "            DATEADD ( 'Date'[Date], -1, MONTH ),",
+              "            'Date'[DateWithTransactions] = TRUE",
+              "        )",
+              "    )",
+              ")"
+            ],
+            "displayFolder": "Time intelligence\\To-date growth\\Sum of Mexico Population",
+            "lineageTag": "be2a0076-7e8c-4652-9501-872fa94e2dce",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "MOMTD Sum of Mexico Population",
+            "expression": [
+              "",
+              "VAR __ValueCurrentPeriod = [MTD Sum of Mexico Population]",
+              "VAR __ValuePreviousPeriod = [PMTD Sum of Mexico Population]",
+              "VAR __Result =",
+              "    IF (",
+              "        NOT ISBLANK ( __ValueCurrentPeriod ) && NOT ISBLANK ( __ValuePreviousPeriod ),",
+              "        __ValueCurrentPeriod - __ValuePreviousPeriod",
+              "    )",
+              "RETURN",
+              "    __Result"
+            ],
+            "displayFolder": "Time intelligence\\To-date growth\\Sum of Mexico Population",
+            "lineageTag": "26ee7498-3e5d-454a-afd7-494765d7a103",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "MOMTD % Sum of Mexico Population",
+            "expression": [
+              "",
+              "DIVIDE ( ",
+              "    [MOMTD Sum of Mexico Population],",
+              "    [PMTD Sum of Mexico Population]",
+              ")"
+            ],
+            "formatString": "0.00%",
+            "displayFolder": "Time intelligence\\To-date growth\\Sum of Mexico Population",
+            "lineageTag": "835ba7e7-3586-4c56-a3e4-52ee953b9ab0",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "PYC Sum of Mexico Population",
+            "expression": [
+              "",
+              "IF (",
+              "    [_ShowValueForDates],",
+              "    CALCULATE (",
+              "        [Sum of Population],",
+              "        PARALLELPERIOD ( 'Date'[Date], -1, YEAR )",
+              "    )",
+              ")"
+            ],
+            "displayFolder": "Time intelligence\\Growth over full period\\Sum of Mexico Population",
+            "lineageTag": "731b7cd1-0a06-4e27-b636-1aec570220ac",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "YTDOPY Sum of Mexico Population",
+            "expression": [
+              "",
+              "VAR __ValueCurrentPeriod = [YTD Sum of Mexico Population]",
+              "VAR __ValuePreviousPeriod = [PYC Sum of Mexico Population]",
+              "VAR __Result =",
+              "    IF (",
+              "        NOT ISBLANK ( __ValueCurrentPeriod ) && NOT ISBLANK ( __ValuePreviousPeriod ),",
+              "        __ValueCurrentPeriod - __ValuePreviousPeriod",
+              "    )",
+              "RETURN",
+              "    __Result"
+            ],
+            "displayFolder": "Time intelligence\\Growth over full period\\Sum of Mexico Population",
+            "lineageTag": "69c0334b-25f4-4afc-a3c4-df0b9f7a504c",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "YDTOPY % Sum of Mexico Population",
+            "expression": [
+              "",
+              "DIVIDE ( ",
+              "    [YTDOPY Sum of Mexico Population],",
+              "    [PYC Sum of Mexico Population]",
+              ")"
+            ],
+            "formatString": "0.00%",
+            "displayFolder": "Time intelligence\\Growth over full period\\Sum of Mexico Population",
+            "lineageTag": "a42f7867-6f69-4c4c-b1ed-6f9d9e0e5509",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "PQC Sum of Mexico Population",
+            "expression": [
+              "",
+              "IF (",
+              "    [_ShowValueForDates],",
+              "    CALCULATE (",
+              "        [Sum of Population],",
+              "        PARALLELPERIOD ( 'Date'[Date], -1, QUARTER )",
+              "    )",
+              ")"
+            ],
+            "displayFolder": "Time intelligence\\Growth over full period\\Sum of Mexico Population",
+            "lineageTag": "f4d426c5-7888-41c0-8003-541a2767d3d5",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "QTDOPQ Sum of Mexico Population",
+            "expression": [
+              "",
+              "VAR __ValueCurrentPeriod = [QTD Sum of Mexico Population]",
+              "VAR __ValuePreviousPeriod = [PQC Sum of Mexico Population]",
+              "VAR __Result =",
+              "    IF (",
+              "        NOT ISBLANK ( __ValueCurrentPeriod ) && NOT ISBLANK ( __ValuePreviousPeriod ),",
+              "        __ValueCurrentPeriod - __ValuePreviousPeriod",
+              "    )",
+              "RETURN",
+              "    __Result"
+            ],
+            "displayFolder": "Time intelligence\\Growth over full period\\Sum of Mexico Population",
+            "lineageTag": "e4104342-a0e8-4b5e-8521-bc2e2f2048d7",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "QDTOPQ % Sum of Mexico Population",
+            "expression": [
+              "",
+              "DIVIDE ( ",
+              "    [QTDOPQ Sum of Mexico Population],",
+              "    [PQC Sum of Mexico Population]",
+              ")"
+            ],
+            "formatString": "0.00%",
+            "displayFolder": "Time intelligence\\Growth over full period\\Sum of Mexico Population",
+            "lineageTag": "7566ef74-1d17-4c49-8487-06208d61d747",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "PMC Sum of Mexico Population",
+            "expression": [
+              "",
+              "IF (",
+              "    [_ShowValueForDates],",
+              "    CALCULATE (",
+              "        [Sum of Population],",
+              "        PARALLELPERIOD ( 'Date'[Date], -1, MONTH )",
+              "    )",
+              ")"
+            ],
+            "displayFolder": "Time intelligence\\Growth over full period\\Sum of Mexico Population",
+            "lineageTag": "368752a8-88ed-415a-a2d4-0345cf16baa2",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "MTDOPM Sum of Mexico Population",
+            "expression": [
+              "",
+              "VAR __ValueCurrentPeriod = [MTD Sum of Mexico Population]",
+              "VAR __ValuePreviousPeriod = [PMC Sum of Mexico Population]",
+              "VAR __Result =",
+              "    IF (",
+              "        NOT ISBLANK ( __ValueCurrentPeriod ) && NOT ISBLANK ( __ValuePreviousPeriod ),",
+              "        __ValueCurrentPeriod - __ValuePreviousPeriod",
+              "    )",
+              "RETURN",
+              "    __Result"
+            ],
+            "displayFolder": "Time intelligence\\Growth over full period\\Sum of Mexico Population",
+            "lineageTag": "38bcc0cf-0329-45d6-b994-841ed6a37e54",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "MTDOPM % Sum of Mexico Population",
+            "expression": [
+              "",
+              "DIVIDE ( ",
+              "    [MTDOPM Sum of Mexico Population],",
+              "    [PMC Sum of Mexico Population]",
+              ")"
+            ],
+            "formatString": "0.00%",
+            "displayFolder": "Time intelligence\\Growth over full period\\Sum of Mexico Population",
+            "lineageTag": "3703928b-d8de-49f1-94bb-5980942c7882",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "MAT Sum of Mexico Population",
+            "expression": [
+              "",
+              "IF (",
+              "    [_ShowValueForDates],",
+              "    CALCULATE (",
+              "        [Sum of Population],",
+              "        DATESINPERIOD (",
+              "            'Date'[Date],",
+              "            MAX ( 'Date'[Date] ),",
+              "            -1,",
+              "            YEAR",
+              "        )",
+              "    )",
+              ")"
+            ],
+            "displayFolder": "Time intelligence\\Moving annual growth\\Sum of Mexico Population",
+            "lineageTag": "a76dcfcf-153e-44e2-85a1-bd16011eb0bf",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "PYMAT Sum of Mexico Population",
+            "expression": [
+              "",
+              "IF (",
+              "    [_ShowValueForDates],",
+              "    CALCULATE (",
+              "        [MAT Sum of Mexico Population],",
+              "        DATEADD ( 'Date'[Date], -1, YEAR )",
+              "    )",
+              ")"
+            ],
+            "displayFolder": "Time intelligence\\Moving annual growth\\Sum of Mexico Population",
+            "lineageTag": "70d73e33-8ede-493b-9cc1-5da24a3ac932",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "MATG Sum of Mexico Population",
+            "expression": [
+              "",
+              "VAR __ValueCurrentPeriod = [MAT Sum of Mexico Population]",
+              "VAR __ValuePreviousPeriod = [PYMAT Sum of Mexico Population]",
+              "VAR __Result =",
+              "    IF (",
+              "        NOT ISBLANK ( __ValueCurrentPeriod ) && NOT ISBLANK ( __ValuePreviousPeriod ),",
+              "        __ValueCurrentPeriod - __ValuePreviousPeriod",
+              "    )",
+              "RETURN",
+              "    __Result"
+            ],
+            "displayFolder": "Time intelligence\\Moving annual growth\\Sum of Mexico Population",
+            "lineageTag": "6831595d-9e7e-41a0-b105-0f8cee31cac3",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "MATG % Sum of Mexico Population",
+            "expression": [
+              "",
+              "DIVIDE ( ",
+              "    [MATG Sum of Mexico Population],",
+              "    [PYMAT Sum of Mexico Population]",
+              ")"
+            ],
+            "formatString": "0.00%",
+            "displayFolder": "Time intelligence\\Moving annual growth\\Sum of Mexico Population",
+            "lineageTag": "63e41754-05dd-4a87-9c47-c956c6b6699a",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "YTD Population_Mexico_Totals",
+            "expression": [
+              "",
+              "IF (",
+              "    [_ShowValueForDates],",
+              "    CALCULATE (",
+              "        [Population_Mexico_Totals],",
+              "        DATESYTD ( 'Date'[Date] )",
+              "    )",
+              ")"
+            ],
+            "displayFolder": "Time intelligence\\To-date total\\Population_Mexico_Totals",
+            "lineageTag": "39f1de85-c91b-4740-9645-418e815f8cae",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "QTD Population_Mexico_Totals",
+            "expression": [
+              "",
+              "IF (",
+              "    [_ShowValueForDates],",
+              "    CALCULATE (",
+              "        [Population_Mexico_Totals],",
+              "        DATESQTD ( 'Date'[Date] )",
+              "    )",
+              ")"
+            ],
+            "displayFolder": "Time intelligence\\To-date total\\Population_Mexico_Totals",
+            "lineageTag": "ea16f215-7bd8-405e-88a6-c844429057b4",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "MTD Population_Mexico_Totals",
+            "expression": [
+              "",
+              "IF (",
+              "    [_ShowValueForDates],",
+              "    CALCULATE (",
+              "        [Population_Mexico_Totals],",
+              "        DATESMTD ( 'Date'[Date] )",
+              "    )",
+              ")"
+            ],
+            "displayFolder": "Time intelligence\\To-date total\\Population_Mexico_Totals",
+            "lineageTag": "d254e8e6-6dcb-41fc-81c8-9dbd37fdd966",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "PY Population_Mexico_Totals",
+            "expression": [
+              "",
+              "IF (",
+              "    [_ShowValueForDates],",
+              "    CALCULATE (",
+              "        [Population_Mexico_Totals],",
+              "        CALCULATETABLE (",
+              "            DATEADD ( 'Date'[Date], -1, YEAR ),",
+              "            'Date'[DateWithTransactions] = TRUE",
+              "        )",
+              "    )",
+              ")"
+            ],
+            "displayFolder": "Time intelligence\\Growth\\Population_Mexico_Totals",
+            "lineageTag": "51640b9c-0b71-4860-9dd7-8ca6590dac55",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "YOY Population_Mexico_Totals",
+            "expression": [
+              "",
+              "VAR __ValueCurrentPeriod = [Population_Mexico_Totals]",
+              "VAR __ValuePreviousPeriod = [PY Population_Mexico_Totals]",
+              "VAR __Result =",
+              "    IF (",
+              "        NOT ISBLANK ( __ValueCurrentPeriod ) && NOT ISBLANK ( __ValuePreviousPeriod ),",
+              "        __ValueCurrentPeriod - __ValuePreviousPeriod",
+              "    )",
+              "RETURN",
+              "    __Result"
+            ],
+            "displayFolder": "Time intelligence\\Growth\\Population_Mexico_Totals",
+            "lineageTag": "c422f480-68d6-4278-80d8-6a9e75e64f15",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "YOY % Population_Mexico_Totals",
+            "expression": [
+              "",
+              "DIVIDE ( ",
+              "    [YOY Population_Mexico_Totals],",
+              "    [PY Population_Mexico_Totals]",
+              ")"
+            ],
+            "formatString": "0.00%",
+            "displayFolder": "Time intelligence\\Growth\\Population_Mexico_Totals",
+            "lineageTag": "f95eee50-a6b2-44f2-9fb8-12e7e8a6ea25",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "PQ Population_Mexico_Totals",
+            "expression": [
+              "",
+              "IF (",
+              "    [_ShowValueForDates],",
+              "    CALCULATE (",
+              "        [Population_Mexico_Totals],",
+              "        CALCULATETABLE (",
+              "            DATEADD ( 'Date'[Date], -1, QUARTER ),",
+              "            'Date'[DateWithTransactions] = TRUE",
+              "        )",
+              "    )",
+              ")"
+            ],
+            "displayFolder": "Time intelligence\\Growth\\Population_Mexico_Totals",
+            "lineageTag": "3b05be1c-0814-456b-93bd-28d1f22b0bb4",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "QOQ Population_Mexico_Totals",
+            "expression": [
+              "",
+              "VAR __ValueCurrentPeriod = [Population_Mexico_Totals]",
+              "VAR __ValuePreviousPeriod = [PQ Population_Mexico_Totals]",
+              "VAR __Result =",
+              "    IF (",
+              "        NOT ISBLANK ( __ValueCurrentPeriod ) && NOT ISBLANK ( __ValuePreviousPeriod ),",
+              "        __ValueCurrentPeriod - __ValuePreviousPeriod",
+              "    )",
+              "RETURN",
+              "    __Result"
+            ],
+            "displayFolder": "Time intelligence\\Growth\\Population_Mexico_Totals",
+            "lineageTag": "7e026cf2-6afc-4980-801e-17305d33529e",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "QOQ % Population_Mexico_Totals",
+            "expression": [
+              "",
+              "DIVIDE ( ",
+              "    [QOQ Population_Mexico_Totals],",
+              "    [PQ Population_Mexico_Totals]",
+              ")"
+            ],
+            "formatString": "0.00%",
+            "displayFolder": "Time intelligence\\Growth\\Population_Mexico_Totals",
+            "lineageTag": "5bf66f07-a869-42f2-ba1a-686d7dc7d55b",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "PM Population_Mexico_Totals",
+            "expression": [
+              "",
+              "IF (",
+              "    [_ShowValueForDates],",
+              "    CALCULATE (",
+              "        [Population_Mexico_Totals],",
+              "        CALCULATETABLE (",
+              "            DATEADD ( 'Date'[Date], -1, MONTH ),",
+              "            'Date'[DateWithTransactions] = TRUE",
+              "        )",
+              "    )",
+              ")"
+            ],
+            "displayFolder": "Time intelligence\\Growth\\Population_Mexico_Totals",
+            "lineageTag": "5f99080e-0899-4954-8b8a-3092b24bc92a",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "MOM Population_Mexico_Totals",
+            "expression": [
+              "",
+              "VAR __ValueCurrentPeriod = [Population_Mexico_Totals]",
+              "VAR __ValuePreviousPeriod = [PM Population_Mexico_Totals]",
+              "VAR __Result =",
+              "    IF (",
+              "        NOT ISBLANK ( __ValueCurrentPeriod ) && NOT ISBLANK ( __ValuePreviousPeriod ),",
+              "        __ValueCurrentPeriod - __ValuePreviousPeriod",
+              "    )",
+              "RETURN",
+              "    __Result"
+            ],
+            "displayFolder": "Time intelligence\\Growth\\Population_Mexico_Totals",
+            "lineageTag": "997e5f04-93fa-40a4-a03e-c7ab5bceaa7c",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "MOM % Population_Mexico_Totals",
+            "expression": [
+              "",
+              "DIVIDE ( ",
+              "    [MOM Population_Mexico_Totals],",
+              "    [PM Population_Mexico_Totals]",
+              ")"
+            ],
+            "formatString": "0.00%",
+            "displayFolder": "Time intelligence\\Growth\\Population_Mexico_Totals",
+            "lineageTag": "69519a7c-d585-4e6d-86dc-0e36e2af3ad0",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "PYTD Population_Mexico_Totals",
+            "expression": [
+              "",
+              "IF (",
+              "    [_ShowValueForDates],",
+              "    CALCULATE (",
+              "        [YTD Population_Mexico_Totals],",
+              "        CALCULATETABLE (",
+              "            DATEADD ( 'Date'[Date], -1, YEAR ),",
+              "            'Date'[DateWithTransactions] = TRUE",
+              "        )",
+              "    )",
+              ")"
+            ],
+            "displayFolder": "Time intelligence\\To-date growth\\Population_Mexico_Totals",
+            "lineageTag": "b4972c06-1ee6-4e6d-88b5-212e5073302b",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "YOYTD Population_Mexico_Totals",
+            "expression": [
+              "",
+              "VAR __ValueCurrentPeriod = [YTD Population_Mexico_Totals]",
+              "VAR __ValuePreviousPeriod = [PYTD Population_Mexico_Totals]",
+              "VAR __Result =",
+              "    IF (",
+              "        NOT ISBLANK ( __ValueCurrentPeriod ) && NOT ISBLANK ( __ValuePreviousPeriod ),",
+              "        __ValueCurrentPeriod - __ValuePreviousPeriod",
+              "    )",
+              "RETURN",
+              "    __Result"
+            ],
+            "displayFolder": "Time intelligence\\To-date growth\\Population_Mexico_Totals",
+            "lineageTag": "d2cefbab-ce78-4787-b11a-2165d92b8219",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "YOYTD % Population_Mexico_Totals",
+            "expression": [
+              "",
+              "DIVIDE ( ",
+              "    [YOYTD Population_Mexico_Totals],",
+              "    [PYTD Population_Mexico_Totals]",
+              ")"
+            ],
+            "formatString": "0.00%",
+            "displayFolder": "Time intelligence\\To-date growth\\Population_Mexico_Totals",
+            "lineageTag": "395b180d-ce9e-4c5b-9962-1dc5e2084234",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "PQTD Population_Mexico_Totals",
+            "expression": [
+              "",
+              "IF (",
+              "    [_ShowValueForDates],",
+              "    CALCULATE (",
+              "        [QTD Population_Mexico_Totals],",
+              "        CALCULATETABLE (",
+              "            DATEADD ( 'Date'[Date], -1, QUARTER ),",
+              "            'Date'[DateWithTransactions] = TRUE",
+              "        )",
+              "    )",
+              ")"
+            ],
+            "displayFolder": "Time intelligence\\To-date growth\\Population_Mexico_Totals",
+            "lineageTag": "924d4c73-6b5f-4e77-a845-acd25c6c23eb",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "QOQTD Population_Mexico_Totals",
+            "expression": [
+              "",
+              "VAR __ValueCurrentPeriod = [QTD Population_Mexico_Totals]",
+              "VAR __ValuePreviousPeriod = [PQTD Population_Mexico_Totals]",
+              "VAR __Result =",
+              "    IF (",
+              "        NOT ISBLANK ( __ValueCurrentPeriod ) && NOT ISBLANK ( __ValuePreviousPeriod ),",
+              "        __ValueCurrentPeriod - __ValuePreviousPeriod",
+              "    )",
+              "RETURN",
+              "    __Result"
+            ],
+            "displayFolder": "Time intelligence\\To-date growth\\Population_Mexico_Totals",
+            "lineageTag": "6091d9f7-c67f-4fe4-b01d-974c4d26b9a8",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "QOQTD % Population_Mexico_Totals",
+            "expression": [
+              "",
+              "DIVIDE ( ",
+              "    [QOQTD Population_Mexico_Totals],",
+              "    [PQTD Population_Mexico_Totals]",
+              ")"
+            ],
+            "formatString": "0.00%",
+            "displayFolder": "Time intelligence\\To-date growth\\Population_Mexico_Totals",
+            "lineageTag": "09b92fe8-d2ac-4e9b-87bc-cd33cbdc928d",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "PMTD Population_Mexico_Totals",
+            "expression": [
+              "",
+              "IF (",
+              "    [_ShowValueForDates],",
+              "    CALCULATE (",
+              "        [MTD Population_Mexico_Totals],",
+              "        CALCULATETABLE (",
+              "            DATEADD ( 'Date'[Date], -1, MONTH ),",
+              "            'Date'[DateWithTransactions] = TRUE",
+              "        )",
+              "    )",
+              ")"
+            ],
+            "displayFolder": "Time intelligence\\To-date growth\\Population_Mexico_Totals",
+            "lineageTag": "3657e546-8ac6-4883-8788-fcbef70d30f0",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "MOMTD Population_Mexico_Totals",
+            "expression": [
+              "",
+              "VAR __ValueCurrentPeriod = [MTD Population_Mexico_Totals]",
+              "VAR __ValuePreviousPeriod = [PMTD Population_Mexico_Totals]",
+              "VAR __Result =",
+              "    IF (",
+              "        NOT ISBLANK ( __ValueCurrentPeriod ) && NOT ISBLANK ( __ValuePreviousPeriod ),",
+              "        __ValueCurrentPeriod - __ValuePreviousPeriod",
+              "    )",
+              "RETURN",
+              "    __Result"
+            ],
+            "displayFolder": "Time intelligence\\To-date growth\\Population_Mexico_Totals",
+            "lineageTag": "4db77770-6ee8-4432-8dae-deb4cc625269",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "MOMTD % Population_Mexico_Totals",
+            "expression": [
+              "",
+              "DIVIDE ( ",
+              "    [MOMTD Population_Mexico_Totals],",
+              "    [PMTD Population_Mexico_Totals]",
+              ")"
+            ],
+            "formatString": "0.00%",
+            "displayFolder": "Time intelligence\\To-date growth\\Population_Mexico_Totals",
+            "lineageTag": "850e5124-e709-4e3b-a801-81acdca23268",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "PYC Population_Mexico_Totals",
+            "expression": [
+              "",
+              "IF (",
+              "    [_ShowValueForDates],",
+              "    CALCULATE (",
+              "        [Population_Mexico_Totals],",
+              "        PARALLELPERIOD ( 'Date'[Date], -1, YEAR )",
+              "    )",
+              ")"
+            ],
+            "displayFolder": "Time intelligence\\Growth over full period\\Population_Mexico_Totals",
+            "lineageTag": "79f99450-f5ac-4b34-8eb8-a58ab0176c0d",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "YTDOPY Population_Mexico_Totals",
+            "expression": [
+              "",
+              "VAR __ValueCurrentPeriod = [YTD Population_Mexico_Totals]",
+              "VAR __ValuePreviousPeriod = [PYC Population_Mexico_Totals]",
+              "VAR __Result =",
+              "    IF (",
+              "        NOT ISBLANK ( __ValueCurrentPeriod ) && NOT ISBLANK ( __ValuePreviousPeriod ),",
+              "        __ValueCurrentPeriod - __ValuePreviousPeriod",
+              "    )",
+              "RETURN",
+              "    __Result"
+            ],
+            "displayFolder": "Time intelligence\\Growth over full period\\Population_Mexico_Totals",
+            "lineageTag": "477463d5-d947-425f-b059-21fd927389f8",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "YDTOPY % Population_Mexico_Totals",
+            "expression": [
+              "",
+              "DIVIDE ( ",
+              "    [YTDOPY Population_Mexico_Totals],",
+              "    [PYC Population_Mexico_Totals]",
+              ")"
+            ],
+            "formatString": "0.00%",
+            "displayFolder": "Time intelligence\\Growth over full period\\Population_Mexico_Totals",
+            "lineageTag": "fa4e45c3-3209-4606-bd70-998976e1a68e",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "PQC Population_Mexico_Totals",
+            "expression": [
+              "",
+              "IF (",
+              "    [_ShowValueForDates],",
+              "    CALCULATE (",
+              "        [Population_Mexico_Totals],",
+              "        PARALLELPERIOD ( 'Date'[Date], -1, QUARTER )",
+              "    )",
+              ")"
+            ],
+            "displayFolder": "Time intelligence\\Growth over full period\\Population_Mexico_Totals",
+            "lineageTag": "88a88ba5-365e-4448-b5b7-7a899f46d052",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "QTDOPQ Population_Mexico_Totals",
+            "expression": [
+              "",
+              "VAR __ValueCurrentPeriod = [QTD Population_Mexico_Totals]",
+              "VAR __ValuePreviousPeriod = [PQC Population_Mexico_Totals]",
+              "VAR __Result =",
+              "    IF (",
+              "        NOT ISBLANK ( __ValueCurrentPeriod ) && NOT ISBLANK ( __ValuePreviousPeriod ),",
+              "        __ValueCurrentPeriod - __ValuePreviousPeriod",
+              "    )",
+              "RETURN",
+              "    __Result"
+            ],
+            "displayFolder": "Time intelligence\\Growth over full period\\Population_Mexico_Totals",
+            "lineageTag": "40fba539-275e-411d-8b85-2e7641f6e05d",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "QDTOPQ % Population_Mexico_Totals",
+            "expression": [
+              "",
+              "DIVIDE ( ",
+              "    [QTDOPQ Population_Mexico_Totals],",
+              "    [PQC Population_Mexico_Totals]",
+              ")"
+            ],
+            "formatString": "0.00%",
+            "displayFolder": "Time intelligence\\Growth over full period\\Population_Mexico_Totals",
+            "lineageTag": "5478664e-187e-4cb4-b9e2-b4b02dd653e0",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "PMC Population_Mexico_Totals",
+            "expression": [
+              "",
+              "IF (",
+              "    [_ShowValueForDates],",
+              "    CALCULATE (",
+              "        [Population_Mexico_Totals],",
+              "        PARALLELPERIOD ( 'Date'[Date], -1, MONTH )",
+              "    )",
+              ")"
+            ],
+            "displayFolder": "Time intelligence\\Growth over full period\\Population_Mexico_Totals",
+            "lineageTag": "87d3ed49-0a9c-4672-88cd-c8a8052aa1e4",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "MTDOPM Population_Mexico_Totals",
+            "expression": [
+              "",
+              "VAR __ValueCurrentPeriod = [MTD Population_Mexico_Totals]",
+              "VAR __ValuePreviousPeriod = [PMC Population_Mexico_Totals]",
+              "VAR __Result =",
+              "    IF (",
+              "        NOT ISBLANK ( __ValueCurrentPeriod ) && NOT ISBLANK ( __ValuePreviousPeriod ),",
+              "        __ValueCurrentPeriod - __ValuePreviousPeriod",
+              "    )",
+              "RETURN",
+              "    __Result"
+            ],
+            "displayFolder": "Time intelligence\\Growth over full period\\Population_Mexico_Totals",
+            "lineageTag": "a4a6b3ed-f3b0-4654-a054-d93e311f2935",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "MTDOPM % Population_Mexico_Totals",
+            "expression": [
+              "",
+              "DIVIDE ( ",
+              "    [MTDOPM Population_Mexico_Totals],",
+              "    [PMC Population_Mexico_Totals]",
+              ")"
+            ],
+            "formatString": "0.00%",
+            "displayFolder": "Time intelligence\\Growth over full period\\Population_Mexico_Totals",
+            "lineageTag": "f851ac69-bc00-42ad-9ac9-4087a3881c75",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "MAT Population_Mexico_Totals",
+            "expression": [
+              "",
+              "IF (",
+              "    [_ShowValueForDates],",
+              "    CALCULATE (",
+              "        [Population_Mexico_Totals],",
+              "        DATESINPERIOD (",
+              "            'Date'[Date],",
+              "            MAX ( 'Date'[Date] ),",
+              "            -1,",
+              "            YEAR",
+              "        )",
+              "    )",
+              ")"
+            ],
+            "displayFolder": "Time intelligence\\Moving annual growth\\Population_Mexico_Totals",
+            "lineageTag": "e328edfa-c40d-4147-876c-eb53bec3b26b",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "PYMAT Population_Mexico_Totals",
+            "expression": [
+              "",
+              "IF (",
+              "    [_ShowValueForDates],",
+              "    CALCULATE (",
+              "        [MAT Population_Mexico_Totals],",
+              "        DATEADD ( 'Date'[Date], -1, YEAR )",
+              "    )",
+              ")"
+            ],
+            "displayFolder": "Time intelligence\\Moving annual growth\\Population_Mexico_Totals",
+            "lineageTag": "dfebfe16-9ccc-41b7-a143-2396f9477a40",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "MATG Population_Mexico_Totals",
+            "expression": [
+              "",
+              "VAR __ValueCurrentPeriod = [MAT Population_Mexico_Totals]",
+              "VAR __ValuePreviousPeriod = [PYMAT Population_Mexico_Totals]",
+              "VAR __Result =",
+              "    IF (",
+              "        NOT ISBLANK ( __ValueCurrentPeriod ) && NOT ISBLANK ( __ValuePreviousPeriod ),",
+              "        __ValueCurrentPeriod - __ValuePreviousPeriod",
+              "    )",
+              "RETURN",
+              "    __Result"
+            ],
+            "displayFolder": "Time intelligence\\Moving annual growth\\Population_Mexico_Totals",
+            "lineageTag": "224bbcb5-b78e-4390-92fa-1fa7b63e659a",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "MATG % Population_Mexico_Totals",
+            "expression": [
+              "",
+              "DIVIDE ( ",
+              "    [MATG Population_Mexico_Totals],",
+              "    [PYMAT Population_Mexico_Totals]",
+              ")"
+            ],
+            "formatString": "0.00%",
+            "displayFolder": "Time intelligence\\Moving annual growth\\Population_Mexico_Totals",
+            "lineageTag": "607d1a54-7436-41d1-87d0-ff03c4b0621e",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "YTD Population_Mexico_Detailed",
+            "expression": [
+              "",
+              "IF (",
+              "    [_ShowValueForDates],",
+              "    CALCULATE (",
+              "        [Population_Mexico_Detailed],",
+              "        DATESYTD ( 'Date'[Date] )",
+              "    )",
+              ")"
+            ],
+            "displayFolder": "Time intelligence\\To-date total\\Population_Mexico_Detailed",
+            "lineageTag": "2e713b6c-76d2-43d8-85d9-683c54837e6f",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "QTD Population_Mexico_Detailed",
+            "expression": [
+              "",
+              "IF (",
+              "    [_ShowValueForDates],",
+              "    CALCULATE (",
+              "        [Population_Mexico_Detailed],",
+              "        DATESQTD ( 'Date'[Date] )",
+              "    )",
+              ")"
+            ],
+            "displayFolder": "Time intelligence\\To-date total\\Population_Mexico_Detailed",
+            "lineageTag": "b4c8069b-fbc0-4d46-8a69-bf61b584f40a",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "MTD Population_Mexico_Detailed",
+            "expression": [
+              "",
+              "IF (",
+              "    [_ShowValueForDates],",
+              "    CALCULATE (",
+              "        [Population_Mexico_Detailed],",
+              "        DATESMTD ( 'Date'[Date] )",
+              "    )",
+              ")"
+            ],
+            "displayFolder": "Time intelligence\\To-date total\\Population_Mexico_Detailed",
+            "lineageTag": "3d72ba3c-ca7e-4362-b865-6e5cc4256b49",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "PY Population_Mexico_Detailed",
+            "expression": [
+              "",
+              "IF (",
+              "    [_ShowValueForDates],",
+              "    CALCULATE (",
+              "        [Population_Mexico_Detailed],",
+              "        CALCULATETABLE (",
+              "            DATEADD ( 'Date'[Date], -1, YEAR ),",
+              "            'Date'[DateWithTransactions] = TRUE",
+              "        )",
+              "    )",
+              ")"
+            ],
+            "displayFolder": "Time intelligence\\Growth\\Population_Mexico_Detailed",
+            "lineageTag": "cd9cebcf-10f1-43ee-bbc6-9049dbc45729",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "YOY Population_Mexico_Detailed",
+            "expression": [
+              "",
+              "VAR __ValueCurrentPeriod = [Population_Mexico_Detailed]",
+              "VAR __ValuePreviousPeriod = [PY Population_Mexico_Detailed]",
+              "VAR __Result =",
+              "    IF (",
+              "        NOT ISBLANK ( __ValueCurrentPeriod ) && NOT ISBLANK ( __ValuePreviousPeriod ),",
+              "        __ValueCurrentPeriod - __ValuePreviousPeriod",
+              "    )",
+              "RETURN",
+              "    __Result"
+            ],
+            "displayFolder": "Time intelligence\\Growth\\Population_Mexico_Detailed",
+            "lineageTag": "dec1b93a-3d85-41d0-be22-f9e2c13442af",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "YOY % Population_Mexico_Detailed",
+            "expression": [
+              "",
+              "DIVIDE ( ",
+              "    [YOY Population_Mexico_Detailed],",
+              "    [PY Population_Mexico_Detailed]",
+              ")"
+            ],
+            "formatString": "0.00%",
+            "displayFolder": "Time intelligence\\Growth\\Population_Mexico_Detailed",
+            "lineageTag": "eed90493-5189-496c-b231-fdecb4d2c125",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "PQ Population_Mexico_Detailed",
+            "expression": [
+              "",
+              "IF (",
+              "    [_ShowValueForDates],",
+              "    CALCULATE (",
+              "        [Population_Mexico_Detailed],",
+              "        CALCULATETABLE (",
+              "            DATEADD ( 'Date'[Date], -1, QUARTER ),",
+              "            'Date'[DateWithTransactions] = TRUE",
+              "        )",
+              "    )",
+              ")"
+            ],
+            "displayFolder": "Time intelligence\\Growth\\Population_Mexico_Detailed",
+            "lineageTag": "6c3d075e-1f99-4443-94c7-a0374bc5055b",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "QOQ Population_Mexico_Detailed",
+            "expression": [
+              "",
+              "VAR __ValueCurrentPeriod = [Population_Mexico_Detailed]",
+              "VAR __ValuePreviousPeriod = [PQ Population_Mexico_Detailed]",
+              "VAR __Result =",
+              "    IF (",
+              "        NOT ISBLANK ( __ValueCurrentPeriod ) && NOT ISBLANK ( __ValuePreviousPeriod ),",
+              "        __ValueCurrentPeriod - __ValuePreviousPeriod",
+              "    )",
+              "RETURN",
+              "    __Result"
+            ],
+            "displayFolder": "Time intelligence\\Growth\\Population_Mexico_Detailed",
+            "lineageTag": "84c61c0f-d64f-4c37-9894-328c5b635f78",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "QOQ % Population_Mexico_Detailed",
+            "expression": [
+              "",
+              "DIVIDE ( ",
+              "    [QOQ Population_Mexico_Detailed],",
+              "    [PQ Population_Mexico_Detailed]",
+              ")"
+            ],
+            "formatString": "0.00%",
+            "displayFolder": "Time intelligence\\Growth\\Population_Mexico_Detailed",
+            "lineageTag": "e09a6b33-ce09-4071-8bef-3f0de2683565",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "PM Population_Mexico_Detailed",
+            "expression": [
+              "",
+              "IF (",
+              "    [_ShowValueForDates],",
+              "    CALCULATE (",
+              "        [Population_Mexico_Detailed],",
+              "        CALCULATETABLE (",
+              "            DATEADD ( 'Date'[Date], -1, MONTH ),",
+              "            'Date'[DateWithTransactions] = TRUE",
+              "        )",
+              "    )",
+              ")"
+            ],
+            "displayFolder": "Time intelligence\\Growth\\Population_Mexico_Detailed",
+            "lineageTag": "41e2ccd1-be1f-40fb-92ff-11e1a94e9098",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "MOM Population_Mexico_Detailed",
+            "expression": [
+              "",
+              "VAR __ValueCurrentPeriod = [Population_Mexico_Detailed]",
+              "VAR __ValuePreviousPeriod = [PM Population_Mexico_Detailed]",
+              "VAR __Result =",
+              "    IF (",
+              "        NOT ISBLANK ( __ValueCurrentPeriod ) && NOT ISBLANK ( __ValuePreviousPeriod ),",
+              "        __ValueCurrentPeriod - __ValuePreviousPeriod",
+              "    )",
+              "RETURN",
+              "    __Result"
+            ],
+            "displayFolder": "Time intelligence\\Growth\\Population_Mexico_Detailed",
+            "lineageTag": "e24786b6-39f6-4e56-a1fb-310b658e1dff",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "MOM % Population_Mexico_Detailed",
+            "expression": [
+              "",
+              "DIVIDE ( ",
+              "    [MOM Population_Mexico_Detailed],",
+              "    [PM Population_Mexico_Detailed]",
+              ")"
+            ],
+            "formatString": "0.00%",
+            "displayFolder": "Time intelligence\\Growth\\Population_Mexico_Detailed",
+            "lineageTag": "0ee63d49-efbb-4a20-94a0-9d92605a3d2d",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "PYTD Population_Mexico_Detailed",
+            "expression": [
+              "",
+              "IF (",
+              "    [_ShowValueForDates],",
+              "    CALCULATE (",
+              "        [YTD Population_Mexico_Detailed],",
+              "        CALCULATETABLE (",
+              "            DATEADD ( 'Date'[Date], -1, YEAR ),",
+              "            'Date'[DateWithTransactions] = TRUE",
+              "        )",
+              "    )",
+              ")"
+            ],
+            "displayFolder": "Time intelligence\\To-date growth\\Population_Mexico_Detailed",
+            "lineageTag": "a6255b29-51b3-4ff6-98be-c107177d64ad",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "YOYTD Population_Mexico_Detailed",
+            "expression": [
+              "",
+              "VAR __ValueCurrentPeriod = [YTD Population_Mexico_Detailed]",
+              "VAR __ValuePreviousPeriod = [PYTD Population_Mexico_Detailed]",
+              "VAR __Result =",
+              "    IF (",
+              "        NOT ISBLANK ( __ValueCurrentPeriod ) && NOT ISBLANK ( __ValuePreviousPeriod ),",
+              "        __ValueCurrentPeriod - __ValuePreviousPeriod",
+              "    )",
+              "RETURN",
+              "    __Result"
+            ],
+            "displayFolder": "Time intelligence\\To-date growth\\Population_Mexico_Detailed",
+            "lineageTag": "357f48b5-835d-4680-b64e-439220f5bbc7",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "YOYTD % Population_Mexico_Detailed",
+            "expression": [
+              "",
+              "DIVIDE ( ",
+              "    [YOYTD Population_Mexico_Detailed],",
+              "    [PYTD Population_Mexico_Detailed]",
+              ")"
+            ],
+            "formatString": "0.00%",
+            "displayFolder": "Time intelligence\\To-date growth\\Population_Mexico_Detailed",
+            "lineageTag": "29c49af9-614f-454f-83aa-a39fd638c909",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "PQTD Population_Mexico_Detailed",
+            "expression": [
+              "",
+              "IF (",
+              "    [_ShowValueForDates],",
+              "    CALCULATE (",
+              "        [QTD Population_Mexico_Detailed],",
+              "        CALCULATETABLE (",
+              "            DATEADD ( 'Date'[Date], -1, QUARTER ),",
+              "            'Date'[DateWithTransactions] = TRUE",
+              "        )",
+              "    )",
+              ")"
+            ],
+            "displayFolder": "Time intelligence\\To-date growth\\Population_Mexico_Detailed",
+            "lineageTag": "5e7c4452-e7b1-4d3a-a3bb-8af9323eed18",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "QOQTD Population_Mexico_Detailed",
+            "expression": [
+              "",
+              "VAR __ValueCurrentPeriod = [QTD Population_Mexico_Detailed]",
+              "VAR __ValuePreviousPeriod = [PQTD Population_Mexico_Detailed]",
+              "VAR __Result =",
+              "    IF (",
+              "        NOT ISBLANK ( __ValueCurrentPeriod ) && NOT ISBLANK ( __ValuePreviousPeriod ),",
+              "        __ValueCurrentPeriod - __ValuePreviousPeriod",
+              "    )",
+              "RETURN",
+              "    __Result"
+            ],
+            "displayFolder": "Time intelligence\\To-date growth\\Population_Mexico_Detailed",
+            "lineageTag": "693f337a-29e8-4abd-b747-91bfbecb4df3",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "QOQTD % Population_Mexico_Detailed",
+            "expression": [
+              "",
+              "DIVIDE ( ",
+              "    [QOQTD Population_Mexico_Detailed],",
+              "    [PQTD Population_Mexico_Detailed]",
+              ")"
+            ],
+            "formatString": "0.00%",
+            "displayFolder": "Time intelligence\\To-date growth\\Population_Mexico_Detailed",
+            "lineageTag": "c0bc2162-f683-4818-881b-7862339a5b54",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "PMTD Population_Mexico_Detailed",
+            "expression": [
+              "",
+              "IF (",
+              "    [_ShowValueForDates],",
+              "    CALCULATE (",
+              "        [MTD Population_Mexico_Detailed],",
+              "        CALCULATETABLE (",
+              "            DATEADD ( 'Date'[Date], -1, MONTH ),",
+              "            'Date'[DateWithTransactions] = TRUE",
+              "        )",
+              "    )",
+              ")"
+            ],
+            "displayFolder": "Time intelligence\\To-date growth\\Population_Mexico_Detailed",
+            "lineageTag": "0e11cc52-898d-4762-bafd-bec3632fa6fe",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "MOMTD Population_Mexico_Detailed",
+            "expression": [
+              "",
+              "VAR __ValueCurrentPeriod = [MTD Population_Mexico_Detailed]",
+              "VAR __ValuePreviousPeriod = [PMTD Population_Mexico_Detailed]",
+              "VAR __Result =",
+              "    IF (",
+              "        NOT ISBLANK ( __ValueCurrentPeriod ) && NOT ISBLANK ( __ValuePreviousPeriod ),",
+              "        __ValueCurrentPeriod - __ValuePreviousPeriod",
+              "    )",
+              "RETURN",
+              "    __Result"
+            ],
+            "displayFolder": "Time intelligence\\To-date growth\\Population_Mexico_Detailed",
+            "lineageTag": "b1a0f6b9-c851-471e-b1e6-6d880933c44a",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "MOMTD % Population_Mexico_Detailed",
+            "expression": [
+              "",
+              "DIVIDE ( ",
+              "    [MOMTD Population_Mexico_Detailed],",
+              "    [PMTD Population_Mexico_Detailed]",
+              ")"
+            ],
+            "formatString": "0.00%",
+            "displayFolder": "Time intelligence\\To-date growth\\Population_Mexico_Detailed",
+            "lineageTag": "e3818e9d-9945-49db-a3c6-1047e0bfaaec",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "PYC Population_Mexico_Detailed",
+            "expression": [
+              "",
+              "IF (",
+              "    [_ShowValueForDates],",
+              "    CALCULATE (",
+              "        [Population_Mexico_Detailed],",
+              "        PARALLELPERIOD ( 'Date'[Date], -1, YEAR )",
+              "    )",
+              ")"
+            ],
+            "displayFolder": "Time intelligence\\Growth over full period\\Population_Mexico_Detailed",
+            "lineageTag": "ceba79b3-9ec1-4c10-9d5a-d0b189f04c55",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "YTDOPY Population_Mexico_Detailed",
+            "expression": [
+              "",
+              "VAR __ValueCurrentPeriod = [YTD Population_Mexico_Detailed]",
+              "VAR __ValuePreviousPeriod = [PYC Population_Mexico_Detailed]",
+              "VAR __Result =",
+              "    IF (",
+              "        NOT ISBLANK ( __ValueCurrentPeriod ) && NOT ISBLANK ( __ValuePreviousPeriod ),",
+              "        __ValueCurrentPeriod - __ValuePreviousPeriod",
+              "    )",
+              "RETURN",
+              "    __Result"
+            ],
+            "displayFolder": "Time intelligence\\Growth over full period\\Population_Mexico_Detailed",
+            "lineageTag": "a09fe139-af74-4771-9a45-5d1f9dea4037",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "YDTOPY % Population_Mexico_Detailed",
+            "expression": [
+              "",
+              "DIVIDE ( ",
+              "    [YTDOPY Population_Mexico_Detailed],",
+              "    [PYC Population_Mexico_Detailed]",
+              ")"
+            ],
+            "formatString": "0.00%",
+            "displayFolder": "Time intelligence\\Growth over full period\\Population_Mexico_Detailed",
+            "lineageTag": "2a0543ed-b1f4-4063-b2d5-b26c2f8a26fa",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "PQC Population_Mexico_Detailed",
+            "expression": [
+              "",
+              "IF (",
+              "    [_ShowValueForDates],",
+              "    CALCULATE (",
+              "        [Population_Mexico_Detailed],",
+              "        PARALLELPERIOD ( 'Date'[Date], -1, QUARTER )",
+              "    )",
+              ")"
+            ],
+            "displayFolder": "Time intelligence\\Growth over full period\\Population_Mexico_Detailed",
+            "lineageTag": "d5c24d88-509c-4bed-a121-b4a337dd8af5",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "QTDOPQ Population_Mexico_Detailed",
+            "expression": [
+              "",
+              "VAR __ValueCurrentPeriod = [QTD Population_Mexico_Detailed]",
+              "VAR __ValuePreviousPeriod = [PQC Population_Mexico_Detailed]",
+              "VAR __Result =",
+              "    IF (",
+              "        NOT ISBLANK ( __ValueCurrentPeriod ) && NOT ISBLANK ( __ValuePreviousPeriod ),",
+              "        __ValueCurrentPeriod - __ValuePreviousPeriod",
+              "    )",
+              "RETURN",
+              "    __Result"
+            ],
+            "displayFolder": "Time intelligence\\Growth over full period\\Population_Mexico_Detailed",
+            "lineageTag": "6fcec933-af3e-4b9a-8271-1acbe3e6201c",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "QDTOPQ % Population_Mexico_Detailed",
+            "expression": [
+              "",
+              "DIVIDE ( ",
+              "    [QTDOPQ Population_Mexico_Detailed],",
+              "    [PQC Population_Mexico_Detailed]",
+              ")"
+            ],
+            "formatString": "0.00%",
+            "displayFolder": "Time intelligence\\Growth over full period\\Population_Mexico_Detailed",
+            "lineageTag": "15436cd9-a6e8-4134-9b8d-433262805534",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "PMC Population_Mexico_Detailed",
+            "expression": [
+              "",
+              "IF (",
+              "    [_ShowValueForDates],",
+              "    CALCULATE (",
+              "        [Population_Mexico_Detailed],",
+              "        PARALLELPERIOD ( 'Date'[Date], -1, MONTH )",
+              "    )",
+              ")"
+            ],
+            "displayFolder": "Time intelligence\\Growth over full period\\Population_Mexico_Detailed",
+            "lineageTag": "eb652b70-078c-4481-9f62-4d8ebffb53bd",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "MTDOPM Population_Mexico_Detailed",
+            "expression": [
+              "",
+              "VAR __ValueCurrentPeriod = [MTD Population_Mexico_Detailed]",
+              "VAR __ValuePreviousPeriod = [PMC Population_Mexico_Detailed]",
+              "VAR __Result =",
+              "    IF (",
+              "        NOT ISBLANK ( __ValueCurrentPeriod ) && NOT ISBLANK ( __ValuePreviousPeriod ),",
+              "        __ValueCurrentPeriod - __ValuePreviousPeriod",
+              "    )",
+              "RETURN",
+              "    __Result"
+            ],
+            "displayFolder": "Time intelligence\\Growth over full period\\Population_Mexico_Detailed",
+            "lineageTag": "b2bb5622-275c-414b-907a-8524e6d469a2",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "MTDOPM % Population_Mexico_Detailed",
+            "expression": [
+              "",
+              "DIVIDE ( ",
+              "    [MTDOPM Population_Mexico_Detailed],",
+              "    [PMC Population_Mexico_Detailed]",
+              ")"
+            ],
+            "formatString": "0.00%",
+            "displayFolder": "Time intelligence\\Growth over full period\\Population_Mexico_Detailed",
+            "lineageTag": "c7315b78-6821-4d89-9d0f-f82253d4fce2",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "MAT Population_Mexico_Detailed",
+            "expression": [
+              "",
+              "IF (",
+              "    [_ShowValueForDates],",
+              "    CALCULATE (",
+              "        [Population_Mexico_Detailed],",
+              "        DATESINPERIOD (",
+              "            'Date'[Date],",
+              "            MAX ( 'Date'[Date] ),",
+              "            -1,",
+              "            YEAR",
+              "        )",
+              "    )",
+              ")"
+            ],
+            "displayFolder": "Time intelligence\\Moving annual growth\\Population_Mexico_Detailed",
+            "lineageTag": "f21f0e94-f9ef-43df-86eb-cdca3af294ed",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "PYMAT Population_Mexico_Detailed",
+            "expression": [
+              "",
+              "IF (",
+              "    [_ShowValueForDates],",
+              "    CALCULATE (",
+              "        [MAT Population_Mexico_Detailed],",
+              "        DATEADD ( 'Date'[Date], -1, YEAR )",
+              "    )",
+              ")"
+            ],
+            "displayFolder": "Time intelligence\\Moving annual growth\\Population_Mexico_Detailed",
+            "lineageTag": "bca15e3e-da7b-4a8b-aca8-8507b5e6e758",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "MATG Population_Mexico_Detailed",
+            "expression": [
+              "",
+              "VAR __ValueCurrentPeriod = [MAT Population_Mexico_Detailed]",
+              "VAR __ValuePreviousPeriod = [PYMAT Population_Mexico_Detailed]",
+              "VAR __Result =",
+              "    IF (",
+              "        NOT ISBLANK ( __ValueCurrentPeriod ) && NOT ISBLANK ( __ValuePreviousPeriod ),",
+              "        __ValueCurrentPeriod - __ValuePreviousPeriod",
+              "    )",
+              "RETURN",
+              "    __Result"
+            ],
+            "displayFolder": "Time intelligence\\Moving annual growth\\Population_Mexico_Detailed",
+            "lineageTag": "e2a4672c-c907-4b25-bbb0-1e8f36427db1",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "MATG % Population_Mexico_Detailed",
+            "expression": [
+              "",
+              "DIVIDE ( ",
+              "    [MATG Population_Mexico_Detailed],",
+              "    [PYMAT Population_Mexico_Detailed]",
+              ")"
+            ],
+            "formatString": "0.00%",
+            "displayFolder": "Time intelligence\\Moving annual growth\\Population_Mexico_Detailed",
+            "lineageTag": "9975df5e-055f-4288-99a0-948e1883e619",
+            "annotations": [
+              {
+                "name": "SQLBI_Template",
+                "value": "TimeIntelligence"
+              },
+              {
+                "name": "SQLBI_TimeIntelligence",
+                "value": "Standard"
+              },
+              {
+                "name": "SQLBI_CalendarType",
+                "value": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "Sum of Deaths",
+            "expression": "sum(Mexico_Deaths[Deaths])",
+            "formatString": "#,0",
+            "lineageTag": "6b543643-b2ec-4306-b366-ac5bfef19169"
+          },
+          {
+            "name": "test1",
+            "expression": "1",
+            "lineageTag": "b6e7d34d-6b19-4db6-b4b9-8c21074b62be"
+          },
+          {
+            "name": "test2",
+            "expression": "2",
+            "lineageTag": "5c58dd43-bf21-4ab7-870d-06dbd2599f15"
+          }
+        ],
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "name": "6c757719-f9fc-4362-9bf6-44ad64efbfdb",
+        "fromTable": "Mexico_Population",
+        "fromColumn": "Age",
+        "toTable": "Age",
+        "toColumn": "Age"
+      },
+      {
+        "name": "4ac9b03f-5802-489b-9dcc-301b69706920",
+        "fromTable": "Mexico_Population",
+        "fromColumn": "Gender",
+        "toTable": "Gender",
+        "toColumn": "Gender"
+      },
+      {
+        "name": "1dc79c8a-06b8-4ad0-8370-80b20a84b3ab",
+        "fromTable": "Mexico_Population",
+        "fromColumn": "Location_Name",
+        "toTable": "Location",
+        "toColumn": "Location_Name"
+      },
+      {
+        "name": "c6288571-6efe-4808-b18d-542484c0231f",
+        "fromTable": "Mexico_Deaths",
+        "fromColumn": "Location_Name",
+        "toTable": "Location",
+        "toColumn": "Location_Name"
+      },
+      {
+        "name": "851f7695-cf61-4721-abca-d67463abdc40",
+        "fromTable": "Mexico_Deaths",
+        "fromColumn": "Date",
+        "toTable": "Date",
+        "toColumn": "Date"
+      },
+      {
+        "name": "9d594758-a2a8-422b-bafe-fddd75217ea7",
+        "fromTable": "Mexico_Population",
+        "fromColumn": "Date",
+        "toTable": "Date",
+        "toColumn": "Date"
+      }
+    ],
+    "cultures": [
+      {
+        "name": "en-US",
+        "linguisticMetadata": {
+          "content": {
+            "DynamicImprovement": "HighConfidence",
+            "Language": "en-US",
+            "Version": "1.0.0"
+          },
+          "contentType": "json"
+        }
+      }
+    ],
+    "extendedProperties": [
+      {
+        "type": "json",
+        "name": "SQLBI_BRAVO_ManageDatesConfiguration",
+        "value": {
+          "name": "Config-01",
+          "autoNaming": 1,
+          "autoScan": 127,
+          "dateAvailable": true,
+          "dateEnabled": true,
+          "dateReferenceTableName": "DateAutoTemplate",
+          "dateReferenceTableValidation": 1,
+          "dateTableName": "Date",
+          "dateTableValidation": 1,
+          "defaults": {
+            "firstDayOfWeek": 1
+          },
+          "description": "Standard gregorian calendar",
+          "exceptTablesColumns": [],
+          "holidaysAvailable": true,
+          "holidaysDefinitionTableName": "HolidaysDefinition",
+          "holidaysDefinitionTableValidation": 0,
+          "holidaysEnabled": false,
+          "holidaysTableName": "Holidays",
+          "holidaysTableValidation": 0,
+          "isCurrent": false,
+          "isCustom": false,
+          "isoCountry": "US",
+          "onlyTablesColumns": [],
+          "targetMeasures": [],
+          "templateUri": "file:///C:/Users/hecto/AppData/Local/Bravo/.temp/ManageDates/Templates/Config-01.template.json",
+          "timeIntelligenceAvailable": true,
+          "timeIntelligenceEnabled": true
+        }
+      }
+    ],
+    "annotations": [
+      {
+        "name": "__PBI_TimeIntelligenceEnabled",
+        "value": "0"
+      },
+      {
+        "name": "PBIDesktopVersion",
+        "value": "2.118.621.0 (23.06)"
+      },
+      {
+        "name": "PBI_QueryOrder",
+        "value": "[\"_Measures\",\"Mexico_Deaths\",\"Mexico_Population\",\"Gender\",\"Age\",\"Location\"]"
+      },
+      {
+        "name": "PBI_ProTooling",
+        "value": "[\"DevMode\"]"
+      }
+    ]
+  }
+}
